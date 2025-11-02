@@ -4,236 +4,62 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dae Han</title>
-    <meta name="description" content="Portfolio of Dae Han — data engineer and data scientist" />
+    <meta name="description" content="Portfolio of Dae Han — building pipelines, tools, and experiments with data." />
 
-    <!-- Fonts: modern + artsy vibe -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind (CDN) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Manrope', 'system-ui', 'sans-serif'],
-              display: ['Space Grotesk', 'system-ui', 'sans-serif']
+              sans: ['system-ui', 'sans-serif'],
+              display: ['system-ui', 'sans-serif']
             },
             colors: {
-              ink: { 50:'#f6f7f8',100:'#edeff2',200:'#d5dae0',300:'#b0b8c3',400:'#8893a4',500:'#6b768a',600:'#555e6e',700:'#454c59',800:'#2e3441',900:'#12151b' },
-              aqua: { 300:'#8ef2ff',400:'#5ee7ff',500:'#2dd4f7' }
-            },
-            boxShadow: { soft:'0 12px 40px rgba(0,0,0,0.10)', glow:'0 0 0 6px rgba(45,212,247,.15)' },
-            backdropBlur: { xs: '2px' },
-            keyframes: {
-              float: { '0%,100%':{ transform:'translateY(0)' }, '50%':{ transform:'translateY(-8px)' } },
-              marquee: { '0%':{ transform:'translateX(0)' }, '100%':{ transform:'translateX(-50%)' } },
-              blob: { '0%': { transform:'translate(0,0) scale(1)' }, '33%': { transform:'translate(10px,-20px) scale(1.05)' }, '66%': { transform:'translate(-10px,10px) scale(0.98)' }, '100%': { transform:'translate(0,0) scale(1)' } }
-            },
-            animation: { float:'float 6s ease-in-out infinite', marquee:'marquee 30s linear infinite', blob:'blob 16s ease-in-out infinite' }
+              supreme: '#ec1d27'
+            }
           }
         },
-        darkMode:'class'
+        darkMode: 'class'
       }
     </script>
-    <style>
-      /* subtle paper/noise texture */
-      .noise:before{ content:""; position:fixed; inset:0; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.035"/></svg>'); mix-blend-mode:multiply; z-index:10 }
-      .grad-bg{ position:fixed; inset:-20% -20% auto -20%; height:60vh; filter: blur(60px); background: radial-gradient(60% 50% at 30% 40%, rgba(45,212,247,.35), transparent 60%),
-                 radial-gradient(40% 40% at 70% 30%, rgba(94,231,255,.25), transparent 60%),
-                 radial-gradient(40% 60% at 60% 80%, rgba(255,255,255,.18), transparent 60%);
-                 opacity:.9; z-index:-1 }
-      .card:hover{ transform: translateY(-2px) }
-    </style>
   </head>
-
-  <body class="bg-white text-ink-900 dark:bg-ink-900 dark:text-ink-50 selection:bg-aqua-400/30">
-    <div class="grad-bg animate-blob"></div>
-    <div class="noise"></div>
-
-    <!-- Header -->
-    <header class="sticky top-0 z-40 backdrop-blur-sm bg-white/70 dark:bg-ink-900/60 border-b border-ink-100 dark:border-ink-800">
-      <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <a href="#home" class="font-display text-lg tracking-tight">DAE HAN</a>
-        <nav class="hidden sm:flex gap-6 text-sm">
-          <a href="#projects" class="hover:opacity-80">Projects</a>
-          <a href="#about" class="hover:opacity-80">About</a>
-          <a href="#resume" class="hover:opacity-80">Resume</a>
-          <a href="#contact" class="hover:opacity-80">Contact</a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <a aria-label="GitHub" href="https://github.com/dae-han" target="_blank" rel="noopener" class="opacity-80 hover:opacity-100">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M12 2C6.476 2 2 6.59 2 12.253c0 4.532 2.865 8.369 6.839 9.727.5.096.683-.223.683-.495 0-.244-.009-.892-.014-1.751-2.782.617-3.37-1.37-3.37-1.37-.455-1.175-1.11-1.488-1.11-1.488-.908-.636.07-.623.07-.623 1.004.072 1.531 1.058 1.531 1.058.892 1.566 2.341 1.114 2.91.852.092-.662.35-1.114.637-1.37-2.221-.259-4.555-1.145-4.555-5.095 0-1.125.387-2.045 1.022-2.767-.103-.26-.443-1.305.097-2.72 0 0 .836-.274 2.74 1.057A9.29 9.29 0 0 1 12 7.5c.849.004 1.704.116 2.503.34 1.903-1.331 2.738-1.057 2.738-1.057.542 1.415.202 2.46.1 2.72.637.722 1.02 1.642 1.02 2.767 0 3.96-2.338 4.833-4.566 5.087.358.317.678.94.678 1.895 0 1.367-.013 2.471-.013 2.807 0 .274.18.595.688.494C19.139 20.62 22 16.785 22 12.253 22 6.59 17.523 2 12 2Z" clip-rule="evenodd"/></svg>
-          </a>
-          <button id="themeToggle" class="text-xs px-2 py-1 rounded-full border border-ink-200 dark:border-ink-700">Toggle</button>
-        </div>
-      </div>
+  <body class="bg-white text-black font-sans text-sm">
+    <header class="fixed w-full top-0 left-0 bg-white z-10">
+      <nav class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+        <h1 class="text-lg text-gray-700 font-bold tracking-tight">DAE HAN</h1> 
+        <ul class="flex space-x-6 text-sm font-medium">
+          <li><a href="#projects" class="hover:text-supreme">PROJECTS</a></li>
+          <li><a href="#resume" class="hover:text-supreme">RESUME</a></li>
+          <li><a href="#contact" class="hover:text-supreme">CONTACT</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="home" class="relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
-      <div class="absolute inset-0 -z-10 pointer-events-none">
-        <div class="mx-auto max-w-6xl h-full">
-          <div class="mt-10 rounded-[36px] border border-ink-100 dark:border-ink-800 bg-white/40 dark:bg-ink-900/30 backdrop-blur-xs shadow-soft"></div>
-        </div>
+    <main class="pt-40 pb-16 max-w-4xl mx-auto px-4 text-center">
+      <div class="w-full max-w-md mx-auto">
+        <img src="image_landing_page.jpg" alt="Dae Han headshot or visual" class="w-full h-auto" />
       </div>
-      <div class="grid md:grid-cols-12 gap-10 items-center">
-        <div class="md:col-span-7">
-          <h1 class="font-display text-5xl sm:text-6xl leading-[1.05] tracking-tight">
-            Data Engineer <span class="inline-block px-2 -mx-1 rounded-lg bg-aqua-500/20 ring-1 ring-aqua-500/30">Data Scientist</span>
-          </h1>
-          <p class="mt-5 text-ink-600 dark:text-ink-200 text-lg">
-            Data Engineer in basketball analytics. I build clean, reliable pipelines and effective tools.
-          </p>
-          <div class="mt-7 flex flex-wrap items-center gap-3">
-            <a href="#projects" class="inline-flex items-center rounded-2xl px-5 py-2.5 bg-ink-900 text-white dark:bg-white dark:text-ink-900 shadow-soft hover:shadow-glow">View Projects</a>
-            <a href="#resume" class="inline-flex items-center rounded-2xl px-5 py-2.5 border border-ink-300 dark:border-ink-700">Resume</a>
-          </div>
-          <div class="overflow-hidden mt-10">
-            <div class="flex items-center gap-10 whitespace-nowrap animate-marquee opacity-70 text-sm">
-              <span>SQL</span><span>dbt</span><span>Airflow</span><span>Dataflow</span><span>NBA APIs</span><span>Python</span><span>GCP</span><span>AWS</span><span>Docker</span>
-            </div>
-          </div>
-        </div>
-        <div class="md:col-span-5">
-          <div class="relative rounded-3xl border border-ink-100 dark:border-ink-800 p-6 shadow-soft overflow-hidden">
-            <div class="absolute -top-16 -right-10 w-56 h-56 rounded-full bg-aqua-400/30 blur-3xl animate-blob"></div>
-            <p class="text-sm text-ink-600 dark:text-ink-300">
-              With experience providing data solutions for diverse industries, I design, build and maintain data infrastructure that pow-
-              ers machine learning pipelines for predictive analytics products at Golden State Warriors focused on athlete performance
-              and coaching. Driven by a passion for growth and learning, I enjoy solving complex problems that require my expertise in
-              enabling and automating end-to-end data workflows, translating complex technical data into actionable insights with im-
-              pactful narratives for non-technical stakeholders.
-            </p>
-          </div>
-        </div>
+      <div class="flex justify-center gap-6 mt-6">
+        <a href="mailto:daehuih@gmail.com" aria-label="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M1.5 4.75A2.25 2.25 0 0 1 3.75 2.5h16.5A2.25 2.25 0 0 1 22.5 4.75v14.5a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 19.25V4.75Zm1.5 0v.637l9 6.188 9-6.188V4.75a.75.75 0 0 0-.75-.75H3.75a.75.75 0 0 0-.75.75Zm0 2.86v11.64c0 .414.336.75.75.75h16.5a.75.75 0 0 0 .75-.75V7.61l-8.41 5.78a.75.75 0 0 1-.84 0L3 7.61Z"/></svg>
+        </a>
+        <a href="https://github.com/dae-han" target="_blank" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12 2C6.476 2 2 6.59 2 12.253c0 4.532 2.865 8.369 6.839 9.727.5.096.683-.223.683-.495 0-.244-.009-.892-.014-1.751-2.782.617-3.37-1.37-3.37-1.37-.455-1.175-1.11-1.488-1.11-1.488-.908-.636.07-.623.07-.623 1.004.072 1.531 1.058 1.531 1.058.892 1.566 2.341 1.114 2.91.852.092-.662.35-1.114.637-1.37-2.221-.259-4.555-1.145-4.555-5.095 0-1.125.387-2.045 1.022-2.767-.103-.26-.443-1.305.097-2.72 0 0 .836-.274 2.74 1.057A9.29 9.29 0 0 1 12 7.5c.849.004 1.704.116 2.503.34 1.903-1.331 2.738-1.057 2.738-1.057.542 1.415.202 2.46.1 2.72.637.722 1.02 1.642 1.02 2.767 0 3.96-2.338 4.833-4.566 5.087.358.317.678.94.678 1.895 0 1.367-.013 2.471-.013 2.807 0 .274.18.595.688.494C19.139 20.62 22 16.785 22 12.253 22 6.59 17.523 2 12 2Z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/dae-han" target="_blank" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M4.98 3.5C4.98 4.6 4.1 5.5 3 5.5S1 4.6 1 3.5 1.9 1.5 3 1.5s1.98.9 1.98 2Zm.02 4H1V23h4V7.5Zm7.5 0h-3.98V23H12.5V14.6c0-2.9 3.5-3.1 3.5 0V23H20V13.1c0-6.2-7-6-8.5-2.9V7.5Z"/></svg>
+        </a>
       </div>
-    </section>
+    </main>
 
-    <!-- Projects -->
-    <section id="projects" class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <div class="flex items-end justify-between gap-4">
-        <h2 class="font-display text-3xl">Projects</h2>
-        <a href="https://github.com/dae-han" target="_blank" rel="noopener" class="text-sm underline opacity-80 hover:opacity-100">See all →</a>
-      </div>
-      <!-- <p class="mt-2 text-ink-600 dark:text-ink-300">Some of my personal projects involving data science/engineering</p> -->
-
-      <div id="projectGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <h2 class="font-display text-3xl">About</h2>
-      <div class="mt-4 grid md:grid-cols-12 gap-8">
-        <div class="md:col-span-7 space-y-4 text-ink-700 dark:text-ink-200">
-          <p>With experience providing data solutions for diverse industries, I design, build and maintain data infrastructure that pow-
-            ers machine learning pipelines for predictive analytics products at Golden State Warriors focused on athlete performance
-            and coaching. Driven by a passion for growth and learning, I enjoy solving complex problems that require my expertise in
-            enabling and automating end-to-end data workflows, translating complex technical data into actionable insights with im-
-            pactful narratives for non-technical stakeholders.</p>
-          <p>Currently: pipelines & models for basketball analytics..</p>
-        </div>
-        <ul class="md:col-span-5 space-y-2 text-sm text-ink-600 dark:text-ink-300">
-          <li>• Los Angeles → Austin </li>
-          <!-- <li>• Focus: reliability, DX, clarity</li> -->
-          <li>• Tools: SQLm dbt, Airflow, Python, GCP</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Resume -->
-    <section id="resume" class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <h2 class="font-display text-3xl">Resume</h2>
-      <!-- <p class="mt-2 text-ink-600 dark:text-ink-300">Place <code>resume.pdf</code> in repo root; the button will work automatically.</p> -->
-      <a href="./resume.pdf" class="mt-4 inline-flex items-center rounded-2xl px-5 py-2.5 bg-ink-900 text-white dark:bg-white dark:text-ink-900 shadow-soft">Download Resume</a>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-      <h2 class="font-display text-3xl">Contact</h2>
-      <div class="mt-4 grid md:grid-cols-2 gap-6">
-        <div class="rounded-3xl border border-ink-100 dark:border-ink-800 p-6 shadow-soft">
-          <p class="text-ink-600 dark:text-ink-300">Open to collaborations and roles. Best way to reach me is email.</p>
-          <div class="mt-4 flex flex-wrap gap-3 text-sm">
-            <a href="mailto:hello@example.com" class="underline">hello@example.com</a>
-            <span>·</span>
-            <a href="https://github.com/dae-han" target="_blank" rel="noopener" class="underline">GitHub</a>
-          </div>
-        </div>
-        <form 
-        action="https://formspree.io/f/xkgppllb" 
-        method="POST"
-        class="rounded-3xl border border-ink-100 dark:border-ink-800 p-6 shadow-soft space-y-3"
-      >
-        <label class="block text-sm">Name
-          <input name="name" required class="mt-1 w-full rounded-xl border border-ink-300 dark:border-ink-700 bg-transparent px-3 py-2" />
-        </label>
-        <label class="block text-sm">Email
-          <input type="email" name="email" required class="mt-1 w-full rounded-xl border border-ink-300 dark:border-ink-700 bg-transparent px-3 py-2" />
-        </label>
-        <label class="block text-sm">Message
-          <textarea name="message" required rows="4" class="mt-1 w-full rounded-xl border border-ink-300 dark:border-ink-700 bg-transparent px-3 py-2"></textarea>
-        </label>
-        <button type="submit" class="mt-2 inline-flex items-center rounded-2xl px-5 py-2.5 bg-ink-900 text-white dark:bg-white dark:text-ink-900">Send</button>
-      </form>
-      </div>
-    </section>
-
-    <footer class="mx-auto max-w-6xl px-4 py-10 text-sm text-ink-500 dark:text-ink-400">
-      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-ink-100 dark:border-ink-800 pt-6">
-        <p>© <span id="year"></span> Dae Han</p>
-        <a href="#home" class="underline">Back to top</a>
-      </div>
-    </footer>
+    <section id="projects" class="hidden"></section>
+    <section id="resume" class="hidden"></section>
+    <section id="contact" class="hidden"></section>
 
     <script>
-      // Dark mode toggle
-      const html = document.documentElement;
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        html.classList.add('dark');
-      }
-      document.getElementById('themeToggle').addEventListener('click', () => {
-        html.classList.toggle('dark');
-        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-      });
-      document.getElementById('year').textContent = new Date().getFullYear();
-
-      // Project cards
-      const projects = [
-        {
-          title: 'NYC Homeless Shelter Demand Prediction',
-          desc: 'Forecasted future shelter occupancy in New York City using open datasets, feature engineering, and time series modeling.',
-          repo: 'https://github.com/dae-han/Homeless_Shelter_Demand_Prediction',
-          image: 'assets/nyc_homeless_shelter_project.png'
-        },
-        {
-          title: 'Disaster Tweet Map',
-          desc: 'Built a real-time web app to identify and visualize tweets about natural disasters using NLP and geolocation data.',
-          repo: 'https://github.com/dae-han/disaster_tweet_map',
-          image: 'assets/disaster_tweet_map_project.png'
-        },
-        {
-          title: 'Apple Music vs. Spotify: User Insights',
-          desc: 'Performed text classification on Reddit posts to uncover user sentiment and market insights between Apple Music and Spotify.',
-          repo: 'https://github.com/dae-han/reddit_classification',
-          image: 'assets/music_user_project.png'
-        }
-      ];
-
-      const grid = document.getElementById('projectGrid');
-      grid.innerHTML = projects.map(p => `
-        <article class="card transition-transform rounded-3xl border border-ink-100 dark:border-ink-800 overflow-hidden hover:shadow-soft group">
-          ${p.image ? `<div class="overflow-hidden"><img src="${p.image}" alt="${p.title}" class="w-full aspect-video object-cover group-hover:scale-[1.02] transition"></div>` : ''}
-          <div class="p-5">
-            <h3 class="font-semibold font-display text-lg">${p.title}</h3>
-            <p class="mt-1 text-sm text-ink-600 dark:text-ink-300">${p.desc}</p>
-            <a href="${p.repo}" target="_blank" rel="noopener" class="mt-3 inline-flex items-center text-sm underline">View repo →</a>
-          </div>
-        </article>
-      `).join('');
+      document.getElementById('year')?.textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
