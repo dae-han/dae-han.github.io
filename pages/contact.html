@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Dae Han</title>
+    <meta name="description" content="Contact Dae Han — building pipelines, tools, and experiments with data." />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['system-ui', 'sans-serif'],
+              display: ['system-ui', 'sans-serif'],
+              mono: ['Courier New', 'Courier', 'monospace']
+            },
+            colors: {
+              supreme: '#ec1d27'
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-5px)' }
+              },
+              float2: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-5px)' }
+              },
+              slideIn: {
+                '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' }
+              }
+            },
+            animation: {
+              float: 'float 3s ease-in-out infinite',
+              float2: 'float2 4s ease-in-out infinite',
+              slideIn: 'slideIn 0.6s ease-out'
+            }
+          }
+        },
+        darkMode: 'class'
+      }
+    </script>
+  </head>
+  <body class="bg-white text-black font-sans text-sm">
+    <header class="fixed w-full top-0 left-0 bg-white z-10">
+      <nav class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="index.html" class="text-md font-bold tracking-tight font-sans inline-flex items-baseline gap-1">
+          <span class="inline-block animate-float">DAE</span>
+          <span class="inline-block animate-float2">HAN</span>
+        </a>
+        <ul class="flex space-x-6 text-xs font-mono">
+          <li><a href="projects.html" class="hover:text-supreme">projects</a></li>
+          <li><a href="resume.html" class="hover:text-supreme">resume</a></li>
+          <li><a href="contact.html" class="hover:text-supreme text-supreme">contact</a></li>
+          <li><a href="about.html" class="hover:text-supreme">about</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="pt-24 pb-16 max-w-4xl mx-auto px-4">
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold mb-4">Contact</h1>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-lg border border-gray-200 p-6">
+          <p class="text-gray-600 mb-4">Open to collaborations and roles. Best way to reach me is email.</p>
+          <div class="flex flex-wrap gap-3 text-sm">
+            <a href="mailto:daehuih@gmail.com" class="text-supreme hover:underline">daehuih@gmail.com</a>
+            <span class="text-gray-400">·</span>
+            <a href="https://github.com/dae-han" target="_blank" rel="noopener" class="text-supreme hover:underline">GitHub</a>
+          </div>
+        </div>
+        <form 
+          action="https://formspree.io/f/xkgppllb" 
+          method="POST"
+          class="rounded-lg border border-gray-200 p-6 space-y-3"
+        >
+          <label class="block text-sm">
+            Name
+            <input name="name" required class="mt-1 w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-supreme" />
+          </label>
+          <label class="block text-sm">
+            Email
+            <input type="email" name="email" required class="mt-1 w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-supreme" />
+          </label>
+          <label class="block text-sm">
+            Message
+            <textarea name="message" required rows="4" class="mt-1 w-full rounded-lg border border-gray-300 bg-transparent px-3 py-2 focus:outline-none focus:border-supreme"></textarea>
+          </label>
+          <button type="submit" class="mt-2 inline-flex items-center rounded-lg px-5 py-2.5 bg-supreme text-white hover:bg-supreme/90 transition-colors duration-300">
+            Send
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
+
