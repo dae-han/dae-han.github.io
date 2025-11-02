@@ -14,10 +14,25 @@
           extend: {
             fontFamily: {
               sans: ['system-ui', 'sans-serif'],
-              display: ['system-ui', 'sans-serif']
+              display: ['system-ui', 'sans-serif'],
+              mono: ['Courier New', 'Courier', 'monospace']
             },
             colors: {
               supreme: '#ec1d27'
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-5px)' }
+              },
+              slideIn: {
+                '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' }
+              }
+            },
+            animation: {
+              float: 'float 3s ease-in-out infinite',
+              slideIn: 'slideIn 0.6s ease-out'
             }
           }
         },
@@ -28,27 +43,28 @@
   <body class="bg-white text-black font-sans text-sm">
     <header class="fixed w-full top-0 left-0 bg-white z-10">
       <nav class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 class="text-lg text-gray-700 font-bold tracking-tight">DAE HAN</h1> 
-        <ul class="flex space-x-6 text-sm font-medium">
-          <li><a href="#projects" class="hover:text-supreme">PROJECTS</a></li>
-          <li><a href="#resume" class="hover:text-supreme">RESUME</a></li>
-          <li><a href="#contact" class="hover:text-supreme">CONTACT</a></li>
+        <h1 class="text-md font-bold tracking-tight font-sans animate-float">DAE HAN</h1> 
+        <ul class="flex space-x-6 text-xs font-mono">
+          <li><a href="#projects" class="hover:text-supreme">projects</a></li>
+          <li><a href="#resume" class="hover:text-supreme">resume</a></li>
+          <li><a href="#contact" class="hover:text-supreme">contact</a></li>
+          <li><a href="#about" class="hover:text-supreme">about</a></li>
         </ul>
       </nav>
     </header>
 
     <main class="pt-40 pb-16 max-w-4xl mx-auto px-4 text-center">
       <div class="w-full max-w-md mx-auto">
-        <img src="image_landing_page.jpg" alt="Dae Han headshot or visual" class="w-full h-auto" />
+        <img src="landing-image.jpg" alt="Dae Han headshot or visual" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-300" />
       </div>
       <div class="flex justify-center gap-6 mt-6">
-        <a href="mailto:daehuih@gmail.com" aria-label="Email">
+        <a href="mailto:daehuih@gmail.com" aria-label="Email" class="hover:text-supreme transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M1.5 4.75A2.25 2.25 0 0 1 3.75 2.5h16.5A2.25 2.25 0 0 1 22.5 4.75v14.5a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 19.25V4.75Zm1.5 0v.637l9 6.188 9-6.188V4.75a.75.75 0 0 0-.75-.75H3.75a.75.75 0 0 0-.75.75Zm0 2.86v11.64c0 .414.336.75.75.75h16.5a.75.75 0 0 0 .75-.75V7.61l-8.41 5.78a.75.75 0 0 1-.84 0L3 7.61Z"/></svg>
         </a>
-        <a href="https://github.com/dae-han" target="_blank" aria-label="GitHub">
+        <a href="https://github.com/dae-han" target="_blank" aria-label="GitHub" class="hover:text-supreme transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12 2C6.476 2 2 6.59 2 12.253c0 4.532 2.865 8.369 6.839 9.727.5.096.683-.223.683-.495 0-.244-.009-.892-.014-1.751-2.782.617-3.37-1.37-3.37-1.37-.455-1.175-1.11-1.488-1.11-1.488-.908-.636.07-.623.07-.623 1.004.072 1.531 1.058 1.531 1.058.892 1.566 2.341 1.114 2.91.852.092-.662.35-1.114.637-1.37-2.221-.259-4.555-1.145-4.555-5.095 0-1.125.387-2.045 1.022-2.767-.103-.26-.443-1.305.097-2.72 0 0 .836-.274 2.74 1.057A9.29 9.29 0 0 1 12 7.5c.849.004 1.704.116 2.503.34 1.903-1.331 2.738-1.057 2.738-1.057.542 1.415.202 2.46.1 2.72.637.722 1.02 1.642 1.02 2.767 0 3.96-2.338 4.833-4.566 5.087.358.317.678.94.678 1.895 0 1.367-.013 2.471-.013 2.807 0 .274.18.595.688.494C19.139 20.62 22 16.785 22 12.253 22 6.59 17.523 2 12 2Z" clip-rule="evenodd"/></svg>
         </a>
-        <a href="https://linkedin.com/in/dae-han" target="_blank" aria-label="LinkedIn">
+        <a href="https://linkedin.com/in/dae-han" target="_blank" aria-label="LinkedIn" class="hover:text-supreme transition-colors duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M4.98 3.5C4.98 4.6 4.1 5.5 3 5.5S1 4.6 1 3.5 1.9 1.5 3 1.5s1.98.9 1.98 2Zm.02 4H1V23h4V7.5Zm7.5 0h-3.98V23H12.5V14.6c0-2.9 3.5-3.1 3.5 0V23H20V13.1c0-6.2-7-6-8.5-2.9V7.5Z"/></svg>
         </a>
       </div>
