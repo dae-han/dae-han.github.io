@@ -69,6 +69,36 @@
         </a>
       </div>
     </main>
+
+    <script>
+      // Sync animations across page loads
+      (function() {
+        const animationStartKey = 'animationStartTime';
+        let startTime = sessionStorage.getItem(animationStartKey);
+        
+        if (!startTime) {
+          startTime = Date.now();
+          sessionStorage.setItem(animationStartKey, startTime);
+        }
+        
+        const elapsed = (Date.now() - parseInt(startTime)) / 1000; // seconds
+        
+        // DAE animation: 3s duration
+        const daeDelay = -(elapsed % 3);
+        // HAN animation: 4s duration
+        const hanDelay = -(elapsed % 4);
+        
+        const daeSpan = document.querySelector('.animate-float');
+        const hanSpan = document.querySelector('.animate-float2');
+        
+        if (daeSpan) {
+          daeSpan.style.animationDelay = daeDelay + 's';
+        }
+        if (hanSpan) {
+          hanSpan.style.animationDelay = hanDelay + 's';
+        }
+      })();
+    </script>
   </body>
 </html>
 
