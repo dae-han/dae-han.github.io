@@ -49,20 +49,6 @@
         darkMode: 'class'
       }
     </script>
-    <style>
-      /* Mobile first: less padding */
-      main {
-        padding-top: 3vh !important;
-        padding-bottom: 3vh !important;
-      }
-      /* Desktop/laptop: more padding */
-      @media (min-width: 768px) {
-        main {
-          padding-top: 10vh !important;
-          padding-bottom: 5vh !important;
-        }
-      }
-    </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
     <header class="fixed w-full top-0 left-0 bg-white z-10">
@@ -80,7 +66,7 @@
       </nav>
     </header>
 
-    <main class="h-screen flex flex-col items-center justify-center max-w-full mx-auto text-center" style="padding-left: 2vw; padding-right: 2vw;">
+    <main class="h-screen flex flex-col items-center justify-center max-w-full mx-auto text-center pt-[3vh] pb-[3vh] md:pt-[10vh] md:pb-[5vh]" style="padding-left: 2vw; padding-right: 2vw;">
       <div class="w-full h-full flex flex-col items-center justify-center" style="max-width: 90vw; gap: 2vh;">
         <div class="flex-1 flex items-center justify-center min-h-0 w-full">
           <img id="landingImage" src="assets/images/landing-image.jpg" alt="landing page visual" class="w-auto h-full object-contain grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer" style="max-width: 100%; max-height: 100%;" />
@@ -149,28 +135,26 @@
         const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
         if (isMobile) {
-          // Disable hover on mobile by removing the hover class
-          landingImage.classList.remove('hover:grayscale-0');
+          // Remove Tailwind classes on mobile and use inline styles only
+          landingImage.classList.remove('grayscale', 'hover:grayscale-0');
+          landingImage.style.filter = 'grayscale(100%)'; // Start with grayscale
+          landingImage.style.transition = 'filter 0.3s ease';
           
-          landingImage.addEventListener('touchstart', function(e) {
-            e.preventDefault(); // Prevent default touch behavior
-          });
+          let isGrayscale = true;
           
           landingImage.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent any default behavior
-            e.stopPropagation(); // Stop event bubbling
+            e.preventDefault();
+            e.stopPropagation();
             
-            // Toggle grayscale: if it has grayscale class, remove it (show color), otherwise add it (show grayscale)
-            if (this.classList.contains('grayscale')) {
-              this.classList.remove('grayscale');
-              this.classList.add('grayscale-0');
-              this.style.filter = 'grayscale(0%)'; // Force color
+            // Toggle grayscale
+            if (isGrayscale) {
+              this.style.filter = 'grayscale(0%)'; // Show color
+              isGrayscale = false;
             } else {
-              this.classList.add('grayscale');
-              this.classList.remove('grayscale-0');
-              this.style.filter = 'grayscale(100%)'; // Force grayscale
+              this.style.filter = 'grayscale(100%)'; // Show grayscale
+              isGrayscale = true;
             }
-          }, { passive: false });
+          });
         }
         // Desktop will use the hover:grayscale-0 class that's already in the HTML
       }
