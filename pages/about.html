@@ -6,19 +6,22 @@
     <title>About — Dae Han</title>
     <meta name="description" content="About Dae Han — building pipelines, tools, and experiments with data." />
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Genos:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Genos:wght@400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel_preconnect="..." />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['system-ui', 'sans-serif'],
+              // SET 'Inter' as the default sans-serif font
+              sans: ['Inter', 'system-ui', 'sans-serif'],
               display: ['Genos', 'system-ui', 'sans-serif'],
               mono: ['Courier New', 'Courier', 'monospace']
             },
@@ -49,8 +52,34 @@
         darkMode: 'class'
       }
     </script>
+    
+    <style>
+      /* This CSS creates the scrolling room and the fade effect.
+        The `min-h-[75vh]` on each step ensures there is enough
+        scroll distance to trigger the next step.
+      */
+      .story-step {
+        min-height: 75vh; /* Adjust this to feel right */
+        opacity: 0.3;
+        transition: opacity 0.4s ease-in-out;
+      }
+      .story-step.is-active {
+        opacity: 1.0;
+      }
+      /* Ensure the map pane height doesn't exceed the viewport */
+      .map-pane {
+         height: 80vh;
+      }
+
+      /* This clips the filled title so it's 100% hidden from the right */
+      .title-filled {
+        clip-path: inset(0 100% 0 0);
+      }
+    </style>
+
   </head>
   <body class="bg-white text-black font-sans text-sm">
+    
     <header class="fixed w-full top-0 left-0 bg-white z-10">
       <nav class="w-full pl-4 pr-4 sm:pr-16 py-4 sm:py-7 flex justify-between items-center">
         <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
@@ -66,21 +95,102 @@
       </nav>
     </header>
 
-    <main class="pt-24 pb-16 max-w-4xl mx-auto px-4 min-h-screen">
-      <div class="mb-8">
-        <h1 class="text-2xl font-bold mb-4">About</h1>
-      </div>
-      <div class="grid md:grid-cols-12 gap-8">
-        <div class="md:col-span-7 space-y-4 text-gray-700">
-          <p>With experience providing data solutions for diverse industries, I design, build and maintain data infrastructure that powers machine learning pipelines for predictive analytics products at Golden State Warriors focused on athlete performance and coaching. Driven by a passion for growth and learning, I enjoy solving complex problems that require my expertise in enabling and automating end-to-end data workflows, translating complex technical data into actionable insights with impactful narratives for non-technical stakeholders.</p>
-          <p>Currently: pipelines & models for basketball analytics..</p>
+    <main class="pt-24 pb-16">
+      
+      <div class="max-w-6xl mx-auto px-4 mb-8">
+
+        <div class="relative h-12"> <h1 class="title-filled absolute top-0 left-0 text-3xl font-display font-bold text-gray-900">
+            MY JOURNEY
+          </h1>
+      
+          <h1 class="title-outline absolute top-0 left-0 text-3xl font-display font-bold text-gray-900" 
+              style="-webkit-text-stroke: 1px #374151; color: transparent;">
+            MY JOURNEY
+          </h1>
+      
         </div>
-        <ul class="md:col-span-5 space-y-2 text-sm text-gray-600">
-          <li>• Los Angeles → Austin</li>
-          <li>• Tools: SQL, dbt, Airflow, Python, GCP</li>
-        </ul>
+        <p class="text-lg text-gray-600">Connecting the dots from where I've been to what I build.</p>
+      </div>
+      
+      <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 md:gap-16">
+
+        <aside class="md:sticky md:top-24 map-pane md:col-span-1">
+          <div id="map-container" class="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+             <p class="text-gray-400 font-mono">map_canvas.js</p>
+          </div>
+        </aside>
+
+        <article class="md:col-span-1">
+          
+          <section class="story-step" id="step-1" data-location="origin" data-coords="[34.0522, -118.2437]" data-zoom="8">
+            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 1: The Origin</h3>
+            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
+              <p>My journey started in <strong>Los Angeles, CA</strong>. Growing up in such a diverse and dynamic hub sparked my curiosity for how complex systems work and how data connects everything.</p>
+              <img src="path/to/la-logo-or-icon.svg" alt="Los Angeles" class="h-12 mt-4">
+            </div>
+          </section>
+
+          <section class="story-step" id="step-2" data-location="move" data-coords="[30.2672, -97.7431]" data-zoom="8">
+            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 2: New Horizons</h3>
+            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
+              <p>That curiosity led me to <strong>Austin, TX</strong>, a city buzzing with technology and innovation. This is where I truly began to focus my passion for data into a career.</p>
+              </div>
+          </section>
+
+          <section class="story-step" id="step-3" data-location="warriors" data-coords="[37.7680, -122.3877]" data-zoom="12">
+            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 3: The Proving Ground</h3>
+            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
+              <p>With experience providing data solutions for diverse industries, I joined the <strong>Golden State Warriors</strong>. Here, I design, build, and maintain data infrastructure that powers machine learning pipelines for predictive analytics products focused on athlete performance and coaching.</p>
+              <p>I get to solve complex problems that require my expertise in enabling and automating end-to-end data workflows, translating complex technical data into actionable insights for non-technical stakeholders.</p>
+              <img src="path/to/gsw-logo.svg" alt="Golden State Warriors Logo" class="h-16 mt-4">
+            </div>
+          </section>
+          
+          <section class="story-step" id="step-4" data-location="toolkit" data-coords="[37.7680, -122.3877]" data-zoom="13">
+            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 4: My Toolkit</h3>
+            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
+              <p>Currently, my focus is on <strong>pipelines & models for basketball analytics</strong>. My primary tools for building robust, scalable solutions include:</p>
+              <ul class="list-disc list-inside space-y-2">
+                <li>SQL</li>
+                <li>dbt</li>
+                <li>Airflow</li>
+                <li>Python</li>
+                <li>Google Cloud Platform (GCP)</li>
+              </ul>
+              </div>
+          </section>
+          
+          <section class="story-step" id="step-5" data-location="cta">
+            <h3 class="text-2xl font-display font-semibold text-gray-800">Let's build something.</h3>
+            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
+              <p>I'm always driven by a passion for growth and learning. If you're solving complex problems or building something that matters, I'd love to talk.</p>
+              <div class="flex space-x-4 mt-6">
+                <a href="projects.html" class="font-mono text-white bg-gray-900 hover:bg-supreme px-4 py-2 rounded-sm transition-colors">See My Work</a>
+                <a href="contact.html" class="font-mono text-gray-900 border border-gray-900 hover:bg-gray-100 px-4 py-2 rounded-sm transition-colors">Get In Touch</a>
+              </div>
+            </div>
+          </section>
+
+        </article>
       </div>
     </main>
+    
+    <footer class="w-full bg-white relative">
+      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex justify-end items-center">
+        <div class="text-[10px] sm:text-xs font-mono text-gray-800 tracking-tight">
+          © 2025 Dae Han
+        </div>
+      </div>
+    </footer>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js'></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Load config.js first (gitignored, contains your token) -->
+    <script src="../config.js"></script>
+    <script src="../app.js" defer></script>
 
     <script>
       // Sync animations across page loads
@@ -111,13 +221,5 @@
         }
       })();
     </script>
-    <footer class="w-full bg-white relative">
-      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex justify-end items-center">
-        <div class="text-[10px] sm:text-xs font-mono text-gray-800 tracking-tight">
-          © 2025 Dae Han
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
-
