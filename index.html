@@ -49,6 +49,18 @@
         darkMode: 'class'
       }
     </script>
+    <style>
+      #mainContent {
+        padding-top: 3vh !important;
+        padding-bottom: 3vh !important;
+      }
+      @media (min-width: 768px) {
+        #mainContent {
+          padding-top: 10vh !important;
+          padding-bottom: 5vh !important;
+        }
+      }
+    </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
     <header class="fixed w-full top-0 left-0 bg-white z-10">
@@ -66,7 +78,7 @@
       </nav>
     </header>
 
-    <main class="h-screen flex flex-col items-center justify-center max-w-full mx-auto text-center pt-[3vh] pb-[3vh] md:pt-[10vh] md:pb-[5vh]" style="padding-left: 2vw; padding-right: 2vw;">
+    <main id="mainContent" class="h-screen flex flex-col items-center justify-center max-w-full mx-auto text-center" style="padding-left: 2vw; padding-right: 2vw; padding-top: 3vh; padding-bottom: 3vh;">
       <div class="w-full h-full flex flex-col items-center justify-center" style="max-width: 90vw; gap: 2vh;">
         <div class="flex-1 flex items-center justify-center min-h-0 w-full">
           <img id="landingImage" src="assets/images/landing-image.jpg" alt="landing page visual" class="w-auto h-full object-contain grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer" style="max-width: 100%; max-height: 100%;" />
@@ -135,10 +147,10 @@
         const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
         if (isMobile) {
-          // Remove Tailwind classes on mobile and use inline styles only
+          // Remove all Tailwind grayscale classes and use inline styles only
           landingImage.classList.remove('grayscale', 'hover:grayscale-0');
-          landingImage.style.filter = 'grayscale(100%)'; // Start with grayscale
-          landingImage.style.transition = 'filter 0.3s ease';
+          // Force inline style with !important to override any Tailwind classes
+          landingImage.setAttribute('style', landingImage.getAttribute('style') + '; filter: grayscale(100%) !important; transition: filter 0.3s ease;');
           
           let isGrayscale = true;
           
@@ -146,15 +158,15 @@
             e.preventDefault();
             e.stopPropagation();
             
-            // Toggle grayscale
+            // Toggle grayscale with !important
             if (isGrayscale) {
-              this.style.filter = 'grayscale(0%)'; // Show color
+              this.style.setProperty('filter', 'grayscale(0%)', 'important'); // Show color
               isGrayscale = false;
             } else {
-              this.style.filter = 'grayscale(100%)'; // Show grayscale
+              this.style.setProperty('filter', 'grayscale(100%)', 'important'); // Show grayscale
               isGrayscale = true;
             }
-          });
+          }, { passive: false });
         }
         // Desktop will use the hover:grayscale-0 class that's already in the HTML
       }
