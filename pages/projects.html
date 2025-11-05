@@ -96,8 +96,8 @@
           </a>
         </div>
         
-        <!-- Pane 2: Navigation links on the left -->
-        <div class="col-span-1 flex items-center pl-4">
+        <!-- Pane 2: Navigation links on the left (hidden on mobile) -->
+        <div class="col-span-1 hidden sm:flex items-center pl-4">
           <ul class="flex space-x-3 sm:space-x-6">
             <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
             <li class="relative">
@@ -166,7 +166,14 @@
     </main>
 
     <footer class="w-full bg-white fixed bottom-0 left-0">
-      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex justify-end items-center">
+      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        <!-- Mobile navigation links (vertical on left) -->
+        <ul class="flex flex-col space-y-3 sm:hidden mb-3 sm:mb-0">
+          <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
+          <li><a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a></li>
+          <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
+        </ul>
+        <!-- Copyright (right side on desktop, below nav on mobile) -->
         <div class="text-[10px] sm:text-xs font-mono text-gray-800 tracking-tight">
           © 2025 Dae Han
         </div>
@@ -343,13 +350,13 @@
         }
       });
 
-      // Sync animations across page loads
+      // Sync animations across page loads - MUST run immediately
       (function() {
         const animationStartKey = 'animationStartTime';
         let startTime = sessionStorage.getItem(animationStartKey);
         
-        // Only set startTime if it doesn't exist - never reset it
-        if (!startTime || startTime === 'null' || startTime === 'undefined') {
+        // Only set startTime if it doesn't exist or is invalid - never reset it
+        if (startTime === null || startTime === undefined || startTime === '' || startTime === 'null' || startTime === 'undefined') {
           startTime = Date.now().toString();
           sessionStorage.setItem(animationStartKey, startTime);
         }
@@ -358,14 +365,23 @@
         const daeDelay = -(elapsed % 3);
         const hanDelay = -(elapsed % 4);
         
-        const daeSpan = document.querySelector('.animate-float');
-        const hanSpan = document.querySelector('.animate-float2');
-        
-        if (daeSpan) {
-          daeSpan.style.animationDelay = daeDelay + 's';
+        // Apply delays immediately - don't wait for DOM
+        function applyDelays() {
+          const daeSpan = document.querySelector('.animate-float');
+          const hanSpan = document.querySelector('.animate-float2');
+          
+          if (daeSpan) {
+            daeSpan.style.animationDelay = daeDelay + 's';
+          }
+          if (hanSpan) {
+            hanSpan.style.animationDelay = hanDelay + 's';
+          }
         }
-        if (hanSpan) {
-          hanSpan.style.animationDelay = hanDelay + 's';
+        
+        // Try immediately, then again when DOM is ready
+        applyDelays();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyDelays);
         }
       })();
     </script>
