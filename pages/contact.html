@@ -49,20 +49,54 @@
         darkMode: 'class'
       }
     </script>
+    <style>
+      .nav-link {
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        font-family: HelveticaNeue, sans-serif;
+        font-size: .75rem;
+        line-height: 1.0625rem;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
     <header class="fixed w-full top-0 left-0 bg-white z-10">
-      <nav class="w-full pl-4 pr-4 sm:pr-16 py-4 sm:py-7 flex justify-between items-center">
-        <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
-          <span class="inline-block animate-float">DAE</span>
-          <span class="inline-block animate-float2">HAN</span>
-        </a>
-        <ul class="flex space-x-3 sm:space-x-6 text-xs sm:text-sm font-mono">
-          <li><a href="about.html" class="hover:text-supreme">about</a></li>
-          <li><a href="projects.html" class="hover:text-supreme">projects</a></li>
-          <li><a href="resume.html" class="hover:text-supreme">resume</a></li>
-          <li><a href="contact.html" class="hover:text-supreme text-supreme">contact</a></li>
-        </ul>
+      <nav class="w-full h-full grid grid-cols-4 relative py-4 sm:py-7">
+        <!-- Vertical dividers -->
+        <div class="absolute left-[25%] top-0 bottom-0 w-px"></div>
+        <div class="absolute left-[50%] top-0 bottom-0 w-px"></div>
+        <div class="absolute left-[75%] top-0 bottom-0 w-px"></div>
+        
+        <!-- Pane 1: DAE HAN logo -->
+        <div class="col-span-1 flex items-center pl-4">
+          <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
+            <span class="inline-block animate-float">DAE</span>
+            <span class="inline-block animate-float2">HAN</span>
+          </a>
+        </div>
+        
+        <!-- Pane 2: Navigation links on the left -->
+        <div class="col-span-1 flex items-center pl-4">
+          <ul class="flex space-x-3 sm:space-x-6">
+            <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
+            <li><a href="projects.html" class="nav-link hover:text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(90deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a></li>
+            <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
+          </ul>
+        </div>
+        
+        <!-- Pane 3: Empty -->
+        <div class="col-span-1"></div>
+        
+        <!-- Pane 4: CONTACT on the right -->
+        <div class="col-span-1 flex items-center justify-end pr-4 sm:pr-16">
+          <a href="contact.html" class="nav-link hover:text-supreme text-supreme">CONTACT</a>
+        </div>
       </nav>
     </header>
 
@@ -109,8 +143,9 @@
         const animationStartKey = 'animationStartTime';
         let startTime = sessionStorage.getItem(animationStartKey);
         
-        if (!startTime) {
-          startTime = Date.now();
+        // Only set startTime if it doesn't exist - never reset it
+        if (!startTime || startTime === 'null' || startTime === 'undefined') {
+          startTime = Date.now().toString();
           sessionStorage.setItem(animationStartKey, startTime);
         }
         

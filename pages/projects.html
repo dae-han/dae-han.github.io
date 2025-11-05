@@ -6,19 +6,17 @@
     <title>Projects — Dae Han</title>
     <meta name="description" content="Portfolio projects of Dae Han — building pipelines, tools, and experiments with data." />
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Genos:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Genos:wght@400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['system-ui', 'sans-serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif'],
               display: ['Genos', 'system-ui', 'sans-serif'],
               mono: ['Courier New', 'Courier', 'monospace']
             },
@@ -33,99 +31,331 @@
               float2: {
                 '0%, 100%': { transform: 'translateY(0px)' },
                 '50%': { transform: 'translateY(-5px)' }
-              },
-              slideIn: {
-                '0%': { transform: 'translateX(-20px)', opacity: '0' },
-                '100%': { transform: 'translateX(0)', opacity: '1' }
               }
             },
             animation: {
               float: 'float 3s ease-in-out infinite',
-              float2: 'float2 4s ease-in-out infinite',
-              slideIn: 'slideIn 0.6s ease-out'
+              float2: 'float2 4s ease-in-out infinite'
             }
           }
         },
         darkMode: 'class'
       }
     </script>
+    
+    <style>
+      .nav-arrow {
+        transition: color 0.3s ease;
+        cursor: pointer;
+      }
+      .nav-arrow.disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
+      .nav-arrow:not(.disabled):hover {
+        color: #ec1d27;
+      }
+      .nav-link {
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        font-family: HelveticaNeue, sans-serif;
+        font-size: .75rem;
+        line-height: 1.0625rem;
+        font-weight: bold;
+      }
+      #projectList a {
+        white-space: nowrap;
+        font-weight: bold;
+        color: rgb(117, 117, 117);
+      }
+      #projectList a:hover,
+      #projectList a.text-supreme {
+        text-decoration: underline;
+        color: black !important;
+      }
+    </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
     <header class="fixed w-full top-0 left-0 bg-white z-10">
-      <nav class="w-full pl-4 pr-4 sm:pr-16 py-4 sm:py-7 flex justify-between items-center">
-        <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
-          <span class="inline-block animate-float">DAE</span>
-          <span class="inline-block animate-float2">HAN</span>
-        </a>
-        <ul class="flex space-x-3 sm:space-x-6 text-xs sm:text-sm font-mono">
-          <li><a href="about.html" class="hover:text-supreme">about</a></li>
-          <li><a href="projects.html" class="hover:text-supreme text-supreme">projects</a></li>
-          <li><a href="resume.html" class="hover:text-supreme">resume</a></li>
-          <li><a href="contact.html" class="hover:text-supreme">contact</a></li>
-        </ul>
+      <nav class="w-full h-full grid grid-cols-4 relative py-4 sm:py-7">
+        <!-- Vertical dividers -->
+        <div class="absolute left-[25%] top-0 bottom-0 w-px"></div>
+        <div class="absolute left-[50%] top-0 bottom-0 w-px"></div>
+        <div class="absolute left-[75%] top-0 bottom-0 w-px"></div>
+        
+        <!-- Pane 1: DAE HAN logo -->
+        <div class="col-span-1 flex items-center pl-4">
+          <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
+            <span class="inline-block animate-float">DAE</span>
+            <span class="inline-block animate-float2">HAN</span>
+          </a>
+        </div>
+        
+        <!-- Pane 2: Navigation links on the left -->
+        <div class="col-span-1 flex items-center pl-4">
+          <ul class="flex space-x-3 sm:space-x-6">
+            <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
+            <li class="relative">
+              <a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
+              <!-- Project List - Positioned below PROJECTS -->
+              <ul id="projectList" class="absolute left-0 top-full flex flex-col space-y-4 sm:space-y-0 mt-4 sm:mt-6">
+                <!-- Project list items will be inserted here by JavaScript -->
+              </ul>
+            </li>
+            <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
+          </ul>
+        </div>
+        
+        <!-- Pane 3: Empty -->
+        <div class="col-span-1"></div>
+        
+        <!-- Pane 4: CONTACT on the right -->
+        <div class="col-span-1 flex items-center justify-end pr-4 sm:pr-16">
+          <a href="contact.html" class="nav-link hover:text-supreme">CONTACT</a>
+        </div>
       </nav>
     </header>
 
-    <main class="pt-24 pb-16 max-w-4xl mx-auto px-4 min-h-screen">
-      <div class="mb-8">
-        <h1 class="text-2xl font-bold mb-2">Projects</h1>
-        <p class="text-sm text-gray-600">Some of my personal projects involving data science/engineering</p>
+    <main class="flex items-center justify-center min-h-[calc(100vh-80px)] px-4 pt-8">
+      <div class="max-w-6xl w-[60%]">
+        
+        <!-- Project Display -->
+        <div id="projectDisplay" class="hidden">
+          <div class="flex flex-col gap-8">
+            
+            <!-- Image and Description Row -->
+            <div class="flex flex-col lg:flex-row gap-8 items-center justify-center">
+              
+              <!-- Image Container (slightly to the left) -->
+              <div class="flex-1 lg:max-w-[55%] flex justify-center">
+                <div class="relative">
+                  <img id="projectImage" src="" alt="Project image" class="w-full h-auto object-contain">
+                  
+                  <!-- Navigation Arrows -->
+                  <div class="flex justify-center items-center gap-8 mt-6">
+                    <button id="prevArrow" class="nav-arrow disabled font-mono text-2xl text-gray-400">
+                      &lt;
+                    </button>
+                    <button id="nextArrow" class="nav-arrow disabled font-mono text-2xl text-gray-400">
+                      &gt;
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description (to the right of image) -->
+              <div class="flex-1 lg:max-w-[45%]">
+                <h2 id="projectTitle" class="font-mono text-base font-normal text-black-900 mb-4" style="font-feature-settings: 'liga' 1;"></h2>
+                <div id="projectDescription" class="text-[10px] font-mono text-black-700 space-y-3"></div>
+                <a id="projectRepo" href="#" target="_blank" rel="noopener" class="inline-block mt-6 font-mono text-[10px] text-gray-900 border border-gray-900 hover:bg-gray-100 px-4 py-2 transition-colors">
+                  View Repository
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
-      <div id="projectGrid" class="grid sm:grid-cols-2 gap-6"></div>
     </main>
 
+    <footer class="w-full bg-white fixed bottom-0 left-0">
+      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex justify-end items-center">
+        <div class="text-[10px] sm:text-xs font-mono text-gray-800 tracking-tight">
+          © 2025 Dae Han
+        </div>
+      </div>
+    </footer>
+
     <script>
-      // Project cards
+      // Project data structure
       const projects = [
         {
-          title: 'NYC Homeless Shelter Demand Prediction',
-          desc: 'Forecasted future shelter occupancy in New York City using open datasets, feature engineering, and time series modeling.',
+          title: 'NYC Homeless Shelter Demand Forecast',
+          description: 'Forecasted future shelter occupancy in New York City using open datasets, feature engineering, and time series modeling. Built predictive models to help city planners allocate resources more effectively.',
           repo: 'https://github.com/dae-han/Homeless_Shelter_Demand_Prediction',
-          image: 'assets/nyc_homeless_shelter_project.png'
+          images: [
+            {
+              src: 'assets/nyc_homeless_shelter_project.png',
+              alt: 'NYC Homeless Shelter Project'
+            },
+            {
+              src: 'assets/nyc_homeless_shelter_project_2.png',
+              alt: 'NYC Homeless Shelter Project - Analysis'
+            }
+          ]
         },
         {
           title: 'Disaster Tweet Map',
-          desc: 'Built a real-time web app to identify and visualize tweets about natural disasters using NLP and geolocation data.',
+          description: 'Built a real-time web app to identify and visualize tweets about natural disasters using NLP and geolocation data. Processes thousands of tweets to provide real-time disaster awareness.',
           repo: 'https://github.com/dae-han/disaster_tweet_map',
-          image: 'assets/disaster_tweet_map_project.png'
+          images: [
+            {
+              src: 'assets/disaster_tweet_map_project.png',
+              alt: 'Disaster Tweet Map'
+            }
+          ]
         },
         {
           title: 'Apple Music vs. Spotify: User Insights',
-          desc: 'Performed text classification on Reddit posts to uncover user sentiment and market insights between Apple Music and Spotify.',
+          description: 'Performed text classification on Reddit posts to uncover user sentiment and market insights between Apple Music and Spotify. Analyzed thousands of posts to identify key user preferences and pain points.',
           repo: 'https://github.com/dae-han/reddit_classification',
-          image: 'assets/music_user_project.png'
+          images: [
+            {
+              src: 'assets/music_user_project.png',
+              alt: 'Music User Insights'
+            },
+            {
+              src: 'assets/music_user_project_2.png',
+              alt: 'Music User Insights - Sentiment Analysis'
+            },
+            {
+              src: 'assets/music_user_project_3.png',
+              alt: 'Music User Insights - Comparison'
+            }
+          ]
         }
       ];
 
-      const grid = document.getElementById('projectGrid');
-      grid.innerHTML = projects.map(p => `
-        <article class="border border-gray-200 rounded-lg overflow-hidden hover:border-supreme transition-colors duration-300 group">
-          ${p.image ? `<div class="overflow-hidden"><img src="${p.image}" alt="${p.title}" class="w-full aspect-video object-cover group-hover:scale-[1.02] transition duration-300"></div>` : '<div class="w-full aspect-video bg-gray-100"></div>'}
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-2">${p.title}</h3>
-            <p class="text-sm text-gray-600 mb-3">${p.desc}</p>
-            <a href="${p.repo}" target="_blank" rel="noopener" class="text-xs font-mono text-supreme hover:underline">View repo →</a>
-          </div>
-        </article>
-      `).join('');
-    </script>
+      // State management
+      let currentProjectIndex = -1;
+      let currentImageIndex = 0;
 
-    <script>
+      // Initialize project list
+      const projectList = document.getElementById('projectList');
+      const projectDisplay = document.getElementById('projectDisplay');
+      
+      projects.forEach((project, index) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.className = 'nav-link';
+        link.textContent = project.title;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentProjectIndex = index;
+          currentImageIndex = 0;
+          displayProject();
+          
+          // Update active state
+          projectList.querySelectorAll('a').forEach((a, i) => {
+            if (i === index) {
+              a.classList.add('text-supreme');
+            } else {
+              a.classList.remove('text-supreme');
+            }
+          });
+        });
+        listItem.appendChild(link);
+        projectList.appendChild(listItem);
+      });
+
+      // Automatically display the first project on page load
+      if (projects.length > 0) {
+        currentProjectIndex = 0;
+        currentImageIndex = 0;
+        displayProject();
+        
+        // Set first project as active
+        const firstLink = projectList.querySelector('a');
+        if (firstLink) {
+          firstLink.classList.add('text-supreme');
+        }
+      }
+
+      // Display selected project
+      function displayProject() {
+        const project = projects[currentProjectIndex];
+        if (!project) return;
+
+        // Show display area
+        projectDisplay.classList.remove('hidden');
+
+        // Update title and description
+        document.getElementById('projectTitle').textContent = project.title;
+        document.getElementById('projectDescription').textContent = project.description;
+        document.getElementById('projectRepo').href = project.repo;
+
+        // Display first image
+        updateImage();
+        updateArrows();
+      }
+
+      // Update displayed image
+      function updateImage() {
+        const project = projects[currentProjectIndex];
+        if (!project || !project.images || project.images.length === 0) return;
+
+        const image = project.images[currentImageIndex];
+        const imgElement = document.getElementById('projectImage');
+        imgElement.src = image.src;
+        imgElement.alt = image.alt;
+      }
+
+      // Update arrow states
+      function updateArrows() {
+        const project = projects[currentProjectIndex];
+        if (!project || !project.images) return;
+
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
+
+        // Previous arrow
+        if (currentImageIndex > 0) {
+          prevArrow.classList.remove('disabled');
+          prevArrow.style.color = '';
+        } else {
+          prevArrow.classList.add('disabled');
+          prevArrow.style.color = '#9ca3af'; // gray-400
+        }
+
+        // Next arrow
+        if (currentImageIndex < project.images.length - 1) {
+          nextArrow.classList.remove('disabled');
+          nextArrow.style.color = '';
+        } else {
+          nextArrow.classList.add('disabled');
+          nextArrow.style.color = '#9ca3af'; // gray-400
+        }
+      }
+
+      // Navigation handlers
+      document.getElementById('prevArrow').addEventListener('click', () => {
+        if (currentImageIndex > 0) {
+          currentImageIndex--;
+          updateImage();
+          updateArrows();
+        }
+      });
+
+      document.getElementById('nextArrow').addEventListener('click', () => {
+        const project = projects[currentProjectIndex];
+        if (project && currentImageIndex < project.images.length - 1) {
+          currentImageIndex++;
+          updateImage();
+          updateArrows();
+        }
+      });
+
       // Sync animations across page loads
       (function() {
         const animationStartKey = 'animationStartTime';
         let startTime = sessionStorage.getItem(animationStartKey);
         
-        if (!startTime) {
-          startTime = Date.now();
+        // Only set startTime if it doesn't exist - never reset it
+        if (!startTime || startTime === 'null' || startTime === 'undefined') {
+          startTime = Date.now().toString();
           sessionStorage.setItem(animationStartKey, startTime);
         }
         
-        const elapsed = (Date.now() - parseInt(startTime)) / 1000; // seconds
-        
-        // DAE animation: 3s duration
+        const elapsed = (Date.now() - parseInt(startTime)) / 1000;
         const daeDelay = -(elapsed % 3);
-        // HAN animation: 4s duration
         const hanDelay = -(elapsed % 4);
         
         const daeSpan = document.querySelector('.animate-float');
@@ -139,13 +369,5 @@
         }
       })();
     </script>
-    <footer class="w-full bg-white relative">
-      <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex justify-end items-center">
-        <div class="text-[10px] sm:text-xs font-mono text-gray-800 tracking-tight">
-          © 2025 Dae Han
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
-
