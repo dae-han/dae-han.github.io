@@ -11,14 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Genos:wght@400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              // SET 'Inter' as the default sans-serif font
               sans: ['Inter', 'system-ui', 'sans-serif'],
               display: ['Genos', 'system-ui', 'sans-serif'],
               mono: ['Courier New', 'Courier', 'monospace']
@@ -34,16 +31,11 @@
               float2: {
                 '0%, 100%': { transform: 'translateY(0px)' },
                 '50%': { transform: 'translateY(-5px)' }
-              },
-              slideIn: {
-                '0%': { transform: 'translateX(-20px)', opacity: '0' },
-                '100%': { transform: 'translateX(0)', opacity: '1' }
               }
             },
             animation: {
               float: 'float 3s ease-in-out infinite',
-              float2: 'float2 4s ease-in-out infinite',
-              slideIn: 'slideIn 0.6s ease-out'
+              float2: 'float2 4s ease-in-out infinite'
             }
           }
         },
@@ -52,18 +44,6 @@
     </script>
     
     <style>
-      /* This CSS creates the scrolling room and the fade effect.
-        The `min-h-[75vh]` on each step ensures there is enough
-        scroll distance to trigger the next step.
-      */
-      .story-step {
-        min-height: 75vh; /* Adjust this to feel right */
-        opacity: 0.3;
-        transition: opacity 0.4s ease-in-out;
-      }
-      .story-step.is-active {
-        opacity: 1.0;
-      }
       .nav-link {
         text-rendering: optimizeLegibility;
         font-feature-settings: "kern";
@@ -76,6 +56,19 @@
         font-size: .75rem;
         line-height: 1.0625rem;
         font-weight: bold;
+      }
+      
+      .rotating-text {
+        display: inline-block;
+        transition: opacity 0.5s ease-in-out;
+      }
+      
+      .rotating-text.fade-out {
+        opacity: 0;
+      }
+      
+      .rotating-text.fade-in {
+        opacity: 1;
       }
     </style>
 
@@ -100,87 +93,37 @@
         <!-- Pane 2: Navigation links on the left (hidden on mobile) -->
         <div class="col-span-1 hidden sm:flex items-center pl-4">
           <ul class="flex space-x-3 sm:space-x-6">
-            <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
+            <li><a href="about.html" class="nav-link hover:text-supreme text-supreme">ABOUT</a></li>
             <li><a href="projects.html" class="nav-link hover:text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(90deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a></li>
             <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
           </ul>
         </div>
         
         <!-- Pane 3: Empty -->
-        <div class="col-span-1"></div>
+        <div class="col-span-1 hidden sm:block"></div>
         
         <!-- Pane 4: CONTACT on the right -->
-        <div class="col-span-1 flex items-center justify-end pr-4 sm:pr-16">
+        <div class="col-span-3 sm:col-span-1 flex items-center justify-end pr-4 sm:pr-16">
           <a href="contact.html" class="nav-link hover:text-supreme">CONTACT</a>
         </div>
       </nav>
     </header>
 
-    <main class="pt-24 pb-16">
-      
-      <div class="max-w-6xl mx-auto px-4 mb-8">
-
-        <div class="mb-8">
-          <h1 class="text-3xl font-display font-bold text-gray-900">
-            MY JOURNEY
-          </h1>
+    <main class="pb-25">
+      <div class="max-w-6xl mx-auto px-4 min-h-screen flex items-start justify-center pt-64">
+        <div class="max-w-2xl">
+          <p class="font-mono text-[12px] font-semibold mb-1">About</p>
+          <div class="font-mono text-[11px] font-normal leading-tight text-gray-900">
+          <p class="mb-2">I work in sports analytics, building data infrastructure for predictive models and internal tools.</p>
+          
+          <p class="mb-2">But my path here wasn’t linear. I started out as a chemical engineer, building tools to predict chemical compound volumes, collecting salinity data with underwater instruments at the Scripps Institution of Oceanography, and analyzing pharmaceutical manufacturing data to troubleshoot quality issues.</p>
+          <p class="mb-2">Across those projects, I saw a pattern: data was what drove real-world impact.</p>
+          <p class="mb-2">That insight pulled me deeper into data. Since then, I've worked across industries — from film screening platforms and media marketing to city infrastructure and music tech. The common thread has always been the same: connecting numbers back to people.</p>
+          
+          <p>I like building things that are clean, useful, and thoughtful.<br><br>
+          Sometimes that looks like <span id="rotating-text" class="rotating-text">a prediction model.</span></p>
+          </div>
         </div>
-        <p class="text-lg text-gray-600">Connecting the dots from where I've been to what I build.</p>
-      </div>
-      
-      <div class="max-w-6xl mx-auto px-4">
-        <article>
-          
-          <section class="story-step" id="step-1">
-            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 1: The Origin</h3>
-            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
-              <p>My journey started in <strong>Los Angeles, CA</strong>. Growing up in such a diverse and dynamic hub sparked my curiosity for how complex systems work and how data connects everything.</p>
-              <img src="path/to/la-logo-or-icon.svg" alt="Los Angeles" class="h-12 mt-4">
-            </div>
-          </section>
-
-          <section class="story-step" id="step-2">
-            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 2: New Horizons</h3>
-            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
-              <p>That curiosity led me to <strong>Austin, TX</strong>, a city buzzing with technology and innovation. This is where I truly began to focus my passion for data into a career.</p>
-              </div>
-          </section>
-
-          <section class="story-step" id="step-3">
-            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 3: The Proving Ground</h3>
-            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
-              <p>With experience providing data solutions for diverse industries, I joined the <strong>Golden State Warriors</strong>. Here, I design, build, and maintain data infrastructure that powers machine learning pipelines for predictive analytics products focused on athlete performance and coaching.</p>
-              <p>I get to solve complex problems that require my expertise in enabling and automating end-to-end data workflows, translating complex technical data into actionable insights for non-technical stakeholders.</p>
-              <img src="path/to/gsw-logo.svg" alt="Golden State Warriors Logo" class="h-16 mt-4">
-            </div>
-          </section>
-          
-          <section class="story-step" id="step-4">
-            <h3 class="text-2xl font-display font-semibold text-gray-800">Scene 4: My Toolkit</h3>
-            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
-              <p>Currently, my focus is on <strong>pipelines & models for basketball analytics</strong>. My primary tools for building robust, scalable solutions include:</p>
-              <ul class="list-disc list-inside space-y-2">
-                <li>SQL</li>
-                <li>dbt</li>
-                <li>Airflow</li>
-                <li>Python</li>
-                <li>Google Cloud Platform (GCP)</li>
-              </ul>
-              </div>
-          </section>
-          
-          <section class="story-step" id="step-5">
-            <h3 class="text-2xl font-display font-semibold text-gray-800">Let's build something.</h3>
-            <div class="mt-2 space-y-4 text-gray-700 text-base leading-relaxed">
-              <p>I'm always driven by a passion for growth and learning. If you're solving complex problems or building something that matters, I'd love to talk.</p>
-              <div class="flex space-x-4 mt-6">
-                <a href="projects.html" class="font-mono text-white bg-gray-900 hover:bg-supreme px-4 py-2 rounded-sm transition-colors">See My Work</a>
-                <a href="contact.html" class="font-mono text-gray-900 border border-gray-900 hover:bg-gray-100 px-4 py-2 rounded-sm transition-colors">Get In Touch</a>
-              </div>
-            </div>
-          </section>
-
-        </article>
       </div>
     </main>
     
@@ -188,7 +131,7 @@
       <div class="w-full pl-4 pr-4 sm:pr-16 py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <!-- Mobile navigation links (vertical on left) -->
         <ul class="flex flex-col space-y-3 sm:hidden mb-3 sm:mb-0">
-          <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
+          <li><a href="about.html" class="nav-link hover:text-supreme text-supreme">ABOUT</a></li>
           <li><a href="projects.html" class="nav-link hover:text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(90deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a></li>
           <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
         </ul>
@@ -199,9 +142,8 @@
       </div>
     </footer>
 
-
     <script>
-      // Sync animations across page loads - MUST run immediately
+      // Sync animations across page loads
       (function() {
         const animationStartKey = 'animationStartTime';
         let startTime = sessionStorage.getItem(animationStartKey);
@@ -212,11 +154,8 @@
           sessionStorage.setItem(animationStartKey, startTime);
         }
         
-        const elapsed = (Date.now() - parseInt(startTime)) / 1000; // seconds
-        
-        // DAE animation: 3s duration
+        const elapsed = (Date.now() - parseInt(startTime)) / 1000;
         const daeDelay = -(elapsed % 3);
-        // HAN animation: 4s duration
         const hanDelay = -(elapsed % 4);
         
         // Apply delays immediately - don't wait for DOM
@@ -237,6 +176,36 @@
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', applyDelays);
         }
+      })();
+      
+      // Rotating text animation
+      (function() {
+        const rotatingText = document.getElementById('rotating-text');
+        if (!rotatingText) return;
+        
+        const options = ['a prediction model.', 'a website.', 'an idea.', 'an experiment.'];
+        let currentIndex = 0;
+        
+        function rotateText() {
+          // Fade out
+          rotatingText.classList.add('fade-out');
+          rotatingText.classList.remove('fade-in');
+          
+          setTimeout(() => {
+            // Change text
+            currentIndex = (currentIndex + 1) % options.length;
+            rotatingText.textContent = options[currentIndex];
+            
+            // Fade in
+            rotatingText.classList.remove('fade-out');
+            rotatingText.classList.add('fade-in');
+          }, 500); // Match transition duration
+        }
+        
+        // Start rotation after initial delay
+        setTimeout(() => {
+          setInterval(rotateText, 1500); // Change every 3 seconds
+        }, 2000); // Wait 2 seconds before first change
       })();
     </script>
   </body>

@@ -63,6 +63,18 @@
         line-height: 1.0625rem;
         font-weight: bold;
       }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+      .tab-button {
+        transition: color 0.3s ease;
+      }
+      .tab-button.active {
+        color: #ec1d27;
+      }
     </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
@@ -91,26 +103,101 @@
         </div>
         
         <!-- Pane 3: Empty -->
-        <div class="col-span-1"></div>
+        <div class="col-span-1 hidden sm:block"></div>
         
         <!-- Pane 4: CONTACT on the right -->
-        <div class="col-span-1 flex items-center justify-end pr-4 sm:pr-16">
+        <div class="col-span-3 sm:col-span-1 flex items-center justify-end pr-4 sm:pr-16">
           <a href="contact.html" class="nav-link hover:text-supreme">CONTACT</a>
         </div>
       </nav>
     </header>
 
-    <main class="pt-24 pb-16 max-w-4xl mx-auto px-4 min-h-screen">
+    <main class="pt-24 pb-16 max-w-6xl mx-auto px-4 min-h-screen">
       <div class="mb-8">
         <h1 class="text-2xl font-bold mb-4">Resume</h1>
         <a href="./resume.pdf" class="inline-flex items-center rounded-lg px-5 py-2.5 bg-supreme text-white hover:bg-supreme/90 transition-colors duration-300">
           Download Resume
         </a>
       </div>
+
+      <!-- Tabs -->
+      <div class="mb-8 border-b border-gray-200">
+        <ul class="flex space-x-6 sm:space-x-12 text-xs sm:text-sm font-mono">
+          <li>
+            <button class="tab-button active pb-3 hover:text-supreme transition-colors" data-tab="about">
+              ABOUT
+            </button>
+          </li>
+          <li>
+            <button class="tab-button pb-3 hover:text-supreme transition-colors" data-tab="education">
+              EDUCATION
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="mt-8">
+        <!-- about Tab -->
+        <div id="about" class="tab-content active">
+          <div class="space-y-12">
+            
+            <div>
+              <h2 class="text-2xl font-display font-semibold text-gray-900 mb-2">Data Engineer</h2>
+              <p class="text-[10px] font-mono text-gray-700 font-semibold mb-1">Golden State Warriors</p>
+              <p class="text-[10px] font-mono text-gray-600 mb-4">2022 - Present</p>
+              <div class="text-[10px] font-mono text-gray-700 space-y-2">
+                <p>Design, build, and maintain data infrastructure that powers machine learning pipelines for predictive analytics products focused on athlete performance and coaching.</p>
+                <p>Enable and automate end-to-end data workflows, translating complex technical data into actionable insights for non-technical stakeholders.</p>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-100">
+              <h2 class="text-2xl font-display font-semibold text-gray-900 mb-2">Data Analyst</h2>
+              <p class="text-[10px] font-mono text-gray-700 font-semibold mb-1">Previous Company</p>
+              <p class="text-[10px] font-mono text-gray-600 mb-4">2020 - 2022</p>
+              <div class="text-[10px] font-mono text-gray-700 space-y-2">
+                <p>Developed data solutions for diverse industries, focusing on building scalable analytics pipelines.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Education Tab -->
+        <div id="education" class="tab-content">
+          <div class="space-y-8">
+            <div>
+              <h2 class="text-2xl font-display font-semibold text-gray-900 mb-4">University of California, Berkeley</h2>
+              <p class="text-[10px] font-mono text-gray-700 mb-2">Bachelor of Science in Data Science</p>
+              <p class="text-[10px] font-mono text-gray-600">2018 - 2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
-      // Sync animations across page loads - MUST run immediately
+      // Tab switching functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+          });
+        });
+
+        // Sync animations across page loads
       (function() {
         const animationStartKey = 'animationStartTime';
         let startTime = sessionStorage.getItem(animationStartKey);
