@@ -78,6 +78,16 @@
         text-decoration: underline;
         color: black !important;
       }
+      #projectListMobile a {
+        white-space: nowrap;
+        font-weight: bold;
+        color: rgb(117, 117, 117);
+      }
+      #projectListMobile a:hover,
+      #projectListMobile a.text-supreme {
+        text-decoration: underline;
+        color: black !important;
+      }
     </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
@@ -170,7 +180,13 @@
         <!-- Mobile navigation links (vertical on left) -->
         <ul class="flex flex-col space-y-3 sm:hidden mb-3 sm:mb-0">
           <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
-          <li><a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a></li>
+          <li class="relative">
+            <a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
+            <!-- Project List - Mobile -->
+            <ul id="projectListMobile" class="flex flex-col space-y-2 mt-2 ml-4">
+              <!-- Project list items will be inserted here by JavaScript -->
+            </ul>
+          </li>
           <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
         </ul>
         <!-- Copyright (right side on desktop, below nav on mobile) -->
@@ -236,9 +252,11 @@
 
       // Initialize project list
       const projectList = document.getElementById('projectList');
+      const projectListMobile = document.getElementById('projectListMobile');
       const projectDisplay = document.getElementById('projectDisplay');
       
-      projects.forEach((project, index) => {
+      // Helper function to create project link
+      function createProjectLink(project, index, container) {
         const listItem = document.createElement('li');
         const link = document.createElement('a');
         link.href = '#';
@@ -250,17 +268,30 @@
           currentImageIndex = 0;
           displayProject();
           
-          // Update active state
-          projectList.querySelectorAll('a').forEach((a, i) => {
-            if (i === index) {
-              a.classList.add('text-supreme');
-            } else {
-              a.classList.remove('text-supreme');
-            }
+          // Update active state in both lists
+          const allLists = [projectList, projectListMobile].filter(list => list);
+          allLists.forEach(list => {
+            list.querySelectorAll('a').forEach((a, i) => {
+              if (i === index) {
+                a.classList.add('text-supreme');
+              } else {
+                a.classList.remove('text-supreme');
+              }
+            });
           });
         });
         listItem.appendChild(link);
-        projectList.appendChild(listItem);
+        container.appendChild(listItem);
+      }
+      
+      // Populate both header and mobile project lists
+      projects.forEach((project, index) => {
+        if (projectList) {
+          createProjectLink(project, index, projectList);
+        }
+        if (projectListMobile) {
+          createProjectLink(project, index, projectListMobile);
+        }
       });
 
       // Automatically display the first project on page load
@@ -269,11 +300,14 @@
         currentImageIndex = 0;
         displayProject();
         
-        // Set first project as active
-        const firstLink = projectList.querySelector('a');
-        if (firstLink) {
-          firstLink.classList.add('text-supreme');
-        }
+        // Set first project as active in both lists
+        const allLists = [projectList, projectListMobile].filter(list => list);
+        allLists.forEach(list => {
+          const firstLink = list.querySelector('a');
+          if (firstLink) {
+            firstLink.classList.add('text-supreme');
+          }
+        });
       }
 
       // Display selected project
