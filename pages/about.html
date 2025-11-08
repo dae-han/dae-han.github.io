@@ -70,6 +70,21 @@
       .rotating-text.fade-in {
         opacity: 1;
       }
+      
+      .fade-in-delayed {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in forwards;
+        animation-delay: 1.7s;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
 
   </head>
@@ -114,14 +129,18 @@
         <div class="max-w-2xl">
           <p class="font-mono text-[12px] font-semibold mb-1">About</p>
           <div class="font-mono text-[11px] font-normal leading-tight text-black">
+          <div class="fade-in-delayed">
           <p class="mb-2">I work in sports analytics, building data infrastructure for predictive models and internal tools.</p>
           
-          <p class="mb-2">My path here wasn’t linear. I started out as a chemical engineer, building tools to predict chemical compound volumes, collecting salinity data with underwater instruments at the Scripps Institution of Oceanography, and analyzing pharmaceutical manufacturing data to troubleshoot quality issues.</p>
+          <p class="mb-2">My path here wasn't linear. I started out as a chemical engineer, building tools to predict chemical compound volumes, collecting salinity data with underwater instruments at the Scripps Institution of Oceanography, and analyzing pharmaceutical manufacturing data to troubleshoot quality issues.</p>
           <p class="mb-2">Across those projects, I saw a pattern: data was what drove real-world impact.</p>
-          <p class="mb-2">That insight pulled me deeper into data. Since then, I've worked across industries from film screening platforms and media marketing to city infrastructure. The common thread has always been the same: connecting numbers back to people. always learning, improving, and expanding.</p>
-          
+          <p class="mb-2">That insight pulled me deeper into data. Since then, I've worked across industries from movie industry and media marketing to city infrastructure. The common thread has always been the same: </p>
+          </div>
+          <p class="mb-2">connecting numbers back to people. always learning, improving, and expanding.</p>
+          <div class="fade-in-delayed">
           <p>I like building things that are clean, useful, and thoughtful.<br>
           Sometimes that looks like <span id="rotating-text" class="rotating-text">a prediction model.</span></p>
+          </div>
           </div>
         </div>
       </div>
