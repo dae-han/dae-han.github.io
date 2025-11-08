@@ -88,6 +88,18 @@
         text-decoration: underline;
         color: black !important;
       }
+      #projectList {
+        display: block; /* Show by default on projects page */
+      }
+      #projectList.hidden {
+        display: none;
+      }
+      #projectListMobile {
+        display: block; /* Show by default on projects page */
+      }
+      #projectListMobile.hidden {
+        display: none;
+      }
     </style>
   </head>
   <body class="bg-white text-black font-sans text-sm">
@@ -111,7 +123,7 @@
           <ul class="flex space-x-3 sm:space-x-6">
             <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
             <li class="relative">
-              <a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
+              <a href="projects.html" id="projectsToggle" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg id="projectsCaret" class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
               <!-- Project List - Positioned below PROJECTS -->
               <ul id="projectList" class="absolute left-0 top-full flex flex-col space-y-4 sm:space-y-0 mt-4 sm:mt-6">
                 <!-- Project list items will be inserted here by JavaScript -->
@@ -181,7 +193,7 @@
         <ul class="flex flex-col space-y-3 sm:hidden mb-3 sm:mb-0">
           <li><a href="about.html" class="nav-link hover:text-supreme">ABOUT</a></li>
           <li class="relative">
-            <a href="projects.html" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
+            <a href="projects.html" id="projectsToggleMobile" class="nav-link hover:text-supreme text-supreme inline-flex items-center gap-1">PROJECTS <i class="block w-[7px]"><svg id="projectsCaretMobile" class="icon icon--caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.75 5.09" style="transform: rotate(180deg);"><title>Caret</title><polygon points="3.88 0 7.75 4.43 7 5.09 3.88 1.52 .75 5.09 0 4.43 3.88 0"></polygon></svg></i></a>
             <!-- Project List - Mobile -->
             <ul id="projectListMobile" class="flex flex-col space-y-2 mt-2 ml-4">
               <!-- Project list items will be inserted here by JavaScript -->
@@ -307,6 +319,50 @@
           if (firstLink) {
             firstLink.classList.add('text-supreme');
           }
+        });
+      }
+
+      // Toggle project list visibility when PROJECTS is clicked
+      function toggleProjectList() {
+        const isVisible = !projectList.classList.contains('hidden');
+        
+        // Toggle both desktop and mobile lists
+        if (isVisible) {
+          projectList.classList.add('hidden');
+          if (projectListMobile) projectListMobile.classList.add('hidden');
+          
+          // Rotate caret to point right (90deg) when closed
+          const caret = document.getElementById('projectsCaret');
+          const caretMobile = document.getElementById('projectsCaretMobile');
+          if (caret) caret.style.transform = 'rotate(90deg)';
+          if (caretMobile) caretMobile.style.transform = 'rotate(90deg)';
+        } else {
+          projectList.classList.remove('hidden');
+          if (projectListMobile) projectListMobile.classList.remove('hidden');
+          
+          // Rotate caret to point down (180deg) when open
+          const caret = document.getElementById('projectsCaret');
+          const caretMobile = document.getElementById('projectsCaretMobile');
+          if (caret) caret.style.transform = 'rotate(180deg)';
+          if (caretMobile) caretMobile.style.transform = 'rotate(180deg)';
+        }
+      }
+
+      // Add click handlers to PROJECTS links
+      const projectsToggle = document.getElementById('projectsToggle');
+      const projectsToggleMobile = document.getElementById('projectsToggleMobile');
+
+      if (projectsToggle) {
+        projectsToggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleProjectList();
+        });
+      }
+
+      if (projectsToggleMobile) {
+        projectsToggleMobile.addEventListener('click', (e) => {
+          e.preventDefault();
+          toggleProjectList();
         });
       }
 
