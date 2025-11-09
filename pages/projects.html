@@ -144,7 +144,7 @@
     </header>
 
     <main class="flex items-center justify-center min-h-screen px-4 pt-8 pb-16 sm:pb-16">
-      <div class="max-w-6xl w-[60%]">
+      <div class="max-w-6xl w-[50%]">
         
         <!-- Project Display -->
         <div id="projectDisplay" class="hidden">
@@ -171,10 +171,11 @@
               </div>
 
               <!-- Description (to the right of image) -->
-              <div class="flex-1 lg:max-w-[45%]">
-                <h2 id="projectTitle" class="font-mono text-base font-normal text-black-900 mb-4" style="font-feature-settings: 'liga' 1;"></h2>
-                <div id="projectDescription" class="text-[10px] font-mono text-black-700 space-y-3"></div>
-                <a id="projectRepo" href="#" target="_blank" rel="noopener" class="inline-block mt-6 font-mono text-[10px] text-gray-900 border border-gray-900 hover:bg-gray-100 px-4 py-2 transition-colors">
+              <div class="flex-1 lg:max-w-[50%]">
+                <p id="projectDate" class="text-[11px] font-mono text-black-700 mb-0 tracking-tighter"></p>
+                <h2 id="projectTitle" class="font-mono text-base font-normal text-black-900 mb-3 -mt-2 tracking-tighter" style="font-feature-settings: 'liga' 1;"></h2>
+                <div id="projectDescription" class="text-[11px] font-mono text-black-700 tracking-tighter leading-tight"></div>
+                <a id="projectRepo" href="#" target="_blank" rel="noopener" class="inline-block mt-6 font-mono text-[11px] text-gray-900 border border-gray-900 hover:bg-gray-100 px-4 py-2 transition-colors">
                   View Repository
                 </a>
               </div>
@@ -213,6 +214,7 @@
       const projects = [
         {
           title: 'NYC Homeless Shelter Demand Forecast',
+          date: '11/04/2025',
           description: 'Forecasted future shelter occupancy in New York City using open datasets, feature engineering, and time series modeling. Built predictive models to help city planners allocate resources more effectively.',
           repo: 'https://github.com/dae-han/Homeless_Shelter_Demand_Prediction',
           images: [
@@ -228,6 +230,7 @@
         },
         {
           title: 'Disaster Tweet Map',
+          date: '11/04/2025',
           description: 'Built a real-time web app to identify and visualize tweets about natural disasters using NLP and geolocation data. Processes thousands of tweets to provide real-time disaster awareness.',
           repo: 'https://github.com/dae-han/disaster_tweet_map',
           images: [
@@ -239,6 +242,7 @@
         },
         {
           title: 'Apple Music vs. Spotify: User Insights',
+          date: '11/04/2025',
           description: 'Performed text classification on Reddit posts to uncover user sentiment and market insights between Apple Music and Spotify. Analyzed thousands of posts to identify key user preferences and pain points.',
           repo: 'https://github.com/dae-han/reddit_classification',
           images: [
@@ -374,7 +378,8 @@
         // Show display area
         projectDisplay.classList.remove('hidden');
 
-        // Update title and description
+        // Update date, title and description
+        document.getElementById('projectDate').textContent = project.date || '';
         document.getElementById('projectTitle').textContent = project.title;
         document.getElementById('projectDescription').textContent = project.description;
         document.getElementById('projectRepo').href = project.repo;
