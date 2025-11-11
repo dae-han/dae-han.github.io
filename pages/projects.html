@@ -112,10 +112,10 @@
         
         <!-- Pane 1: DAE HAN logo -->
         <div class="col-span-1 flex items-center pl-4">
-          <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
-            <span class="inline-block animate-float">DAE</span>
-            <span class="inline-block animate-float2">HAN</span>
-          </a>
+        <a href="../index.html" class="text-lg sm:text-2xl font-display font-bold tracking-tight inline-flex items-baseline gap-1">
+          <span class="inline-block animate-float">DAE</span>
+          <span class="inline-block animate-float2">HAN</span>
+        </a>
         </div>
         
         <!-- Pane 2: Navigation links on the left (hidden on mobile) -->
@@ -130,7 +130,7 @@
               </ul>
             </li>
             <li><a href="resume.html" class="nav-link hover:text-supreme">RESUME</a></li>
-          </ul>
+        </ul>
         </div>
         
         <!-- Pane 3: Empty -->
@@ -143,27 +143,28 @@
       </nav>
     </header>
 
-    <main class="flex items-center justify-center min-h-screen px-4 pt-8 pb-16 sm:pb-16">
-      <div class="max-w-6xl w-[50%]">
+    <main class="flex items-center justify-center min-h-screen px-0 sm:px-4 pt-32 sm:pt-40 pb-16 sm:pb-16">
+      <div class="max-w-6xl w-full sm:w-[50%]">
         
         <!-- Project Display -->
         <div id="projectDisplay" class="hidden">
           <div class="flex flex-col gap-8">
             
             <!-- Image and Description Row -->
-            <div class="flex flex-col lg:flex-row gap-8 items-center justify-center">
+            <div class="flex flex-col lg:flex-row gap-8 items-start justify-center w-full">
               
               <!-- Image Container (slightly to the left) -->
-              <div class="flex-1 lg:max-w-[55%] flex justify-center">
-                <div class="relative">
-                  <img id="projectImage" src="" alt="Project image" class="w-full h-auto object-contain">
-                  
+              <div class="flex-1 lg:max-w-[60%] flex justify-center w-full sm:w-auto">
+                <div class="relative w-full h-[400px] sm:h-[500px] flex flex-col flex-shrink-0">
+                  <div class="flex-1 flex items-start justify-start min-h-0 overflow-hidden">
+                    <img id="projectImage" src="" alt="Project image" class="w-full h-full object-contain object-top">
+                  </div>
                   <!-- Navigation Arrows -->
-                  <div class="flex justify-center items-center gap-8 mt-6">
-                    <button id="prevArrow" class="nav-arrow disabled font-mono text-2xl text-gray-400">
+                  <div id="arrowContainer" class="flex justify-center items-center gap-10 py-2 flex-shrink-0">
+                    <button id="prevArrow" class="nav-arrow disabled font-mono text-1.5xl text-gray-900">
                       &lt;
                     </button>
-                    <button id="nextArrow" class="nav-arrow disabled font-mono text-2xl text-gray-400">
+                    <button id="nextArrow" class="nav-arrow disabled font-mono text-1.5xl text-gray-900">
                       &gt;
                     </button>
                   </div>
@@ -171,7 +172,7 @@
               </div>
 
               <!-- Description (to the right of image) -->
-              <div class="flex-1 lg:max-w-[50%]">
+              <div class="flex-1 lg:max-w-[40%] px-4 sm:px-0 flex flex-col">
                 <p id="projectDate" class="text-[11px] font-mono text-black-700 mb-0 tracking-tighter"></p>
                 <h2 id="projectTitle" class="font-mono text-base font-normal text-black-900 mb-1.5 -mt-2 tracking-tighter" style="font-feature-settings: 'liga' 1;"></h2>
                 <div id="projectDescription" class="text-[11px] font-mono text-black-700 tracking-tighter leading-tight"></div>
@@ -219,11 +220,11 @@
           repo: 'https://github.com/dae-han/Homeless_Shelter_Demand_Prediction',
           images: [
             {
-              src: 'assets/nyc_homeless_shelter_project.png',
+              src: '../assets/images/nyc_homeless_shelter_project.png',
               alt: 'NYC Homeless Shelter Project'
             },
             {
-              src: 'assets/nyc_homeless_shelter_project_2.png',
+              src: '../assets/images/nyc_homeless_shelter_project_2.png',
               alt: 'NYC Homeless Shelter Project - Analysis'
             }
           ]
@@ -445,6 +446,7 @@
         }
       });
 
+
       // Sync animations across page loads - MUST run immediately
       (function() {
         const animationStartKey = 'animationStartTime';
@@ -462,14 +464,14 @@
         
         // Apply delays immediately - don't wait for DOM
         function applyDelays() {
-          const daeSpan = document.querySelector('.animate-float');
-          const hanSpan = document.querySelector('.animate-float2');
-          
-          if (daeSpan) {
-            daeSpan.style.animationDelay = daeDelay + 's';
-          }
-          if (hanSpan) {
-            hanSpan.style.animationDelay = hanDelay + 's';
+        const daeSpan = document.querySelector('.animate-float');
+        const hanSpan = document.querySelector('.animate-float2');
+        
+        if (daeSpan) {
+          daeSpan.style.animationDelay = daeDelay + 's';
+        }
+        if (hanSpan) {
+          hanSpan.style.animationDelay = hanDelay + 's';
           }
         }
         
